@@ -2,7 +2,7 @@
 Corona API for Palembang City (Fake Data)
 
 ### Tutorial API
-```
+
     * Clone Repository ini dengan cara `git clone https://github.com/calvinfm/Covid-GO-API.git`
     * Atau bisa dengan mendownload menjadi `.zip` file
     * Simpan / Extract Folder kedalam `C:\Users\{User}\go`
@@ -10,13 +10,13 @@ Corona API for Palembang City (Fake Data)
     * Buka terminal dan mengarahkan ke folder tempat API disimpan
     * Run Script dengan command `go run Main.go`
     * Server akan berjalan lalu akses di `127.0.0.1:{port}`
-```
+
 
 ### Tools
-```
+
     * IDE
         * [Goland](https://www.jetbrains.com/go/)
         * [Visual Studio Code](https://code.visualstudio.com/download)
     * Database
         * [Postgresql](https://www.postgresql.org/download/)
-```
+
