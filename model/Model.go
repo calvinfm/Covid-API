@@ -1,6 +1,7 @@
 package model
 
 import (
+	"Covid-GO-API/constanta"
 	"Covid-GO-API/settings"
 	"fmt"
 	//"net/http"
@@ -107,6 +108,69 @@ func (ExampleModel Model) GetCovidDb() Covids {
 	result.Total = totalCovid
 
 	return result
+}
+
+// GET From DB
+func (ExampleModel Model) GetCovidIdDb(id int) CovidData {
+
+	sqlStatement := "SELECT daerah_kecamatan.id, daerah_kecamatan.kecamatan, daerah_kecamatan.jumlah_penduduk_positif, daerah_kecamatan.jumlah_penduduk_pulih, daerah_kecamatan.jumlah_penduduk_wafat, zona_daerah.zona_daerah FROM daerah_kecamatan " +
+		"INNER JOIN zona_daerah ON zona_daerah.id = daerah_kecamatan.keadaan_zona " +
+		"WHERE daerah_kecamatan.id = $1 " +
+		"ORDER BY daerah_kecamatan.id ASC"
+
+	res, err := ExampleModel.db.GetDatabaseConfig().Query(sqlStatement, id)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer res.Close()
+
+	covid := CovidData{}
+
+	for res.Next() {
+		err2 := res.Scan(&covid.Id, &covid.Kecamatan, &covid.Jumlah_penduduk_positif, &covid.Jumlah_penduduk_pulih, &covid.Jumlah_penduduk_wafat, &covid.Keadaan_zona)
+		// Exit if we get an error
+		if err2 != nil {
+			fmt.Println(err2)
+		}
+	}
+
+	return covid
+}
+
+type InfoCovid struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+}
+
+type DetailInfoCovid struct {
+	DetailTitle string      `json:"detail_title"`
+	InfoCovids  []InfoCovid `json:"info_covid"`
+}
+
+// GET From DB
+func (ExampleModel Model) GetCovidInfoDb() DetailInfoCovid {
+	info := DetailInfoCovid{}
+	covidInfo := InfoCovid{}
+	covidInfo.Title = constanta.TITLE_INFO_1
+	covidInfo.Description = constanta.DESCRIPTION_INFO_1
+	info.InfoCovids = append(info.InfoCovids, covidInfo)
+
+	covidInfo.Title = constanta.TITLE_INFO_2
+	covidInfo.Description = constanta.DESCRIPTION_INFO_2
+	info.InfoCovids = append(info.InfoCovids, covidInfo)
+
+	covidInfo.Title = constanta.TITLE_INFO_3
+	covidInfo.Description = constanta.DESCRIPTION_INFO_3
+	info.InfoCovids = append(info.InfoCovids, covidInfo)
+
+	covidInfo.Title = constanta.TITLE_INFO_4
+	covidInfo.Description = constanta.DESCRIPTION_INFO_4
+	info.InfoCovids = append(info.InfoCovids, covidInfo)
+
+	info.DetailTitle = constanta.TITLE_INFO
+
+	return info
 }
 
 // Update DB

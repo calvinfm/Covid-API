@@ -77,6 +77,43 @@ func (Controller Controller) GetCovidDB(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
+// Get Data DB
+func (Controller Controller) GetCovidIdDB(c echo.Context) error {
+	id := c.Param("id")
+	ids, err := strconv.Atoi(id)
+	if err == nil {
+		fmt.Println(ids)
+	}
+
+	get := Controller.model.GetCovidIdDb(ids)
+
+	if get.Kecamatan != "" {
+		res := responsegraph.ResponseGenericGet{
+			Status:  "Success",
+			Message: "Berhasil Mendapatkan Data",
+			Data:    get,
+		}
+		return c.JSON(http.StatusOK, res)
+	}
+	res := responsegraph.ResponseGeneric{
+		Status:  "Error",
+		Message: "Gagal Mendapatkan Data",
+	}
+	return c.JSON(http.StatusOK, res)
+}
+
+// Get Data DB
+func (Controller Controller) GetCovidInfoDB(c echo.Context) error {
+	get := Controller.model.GetCovidInfoDb()
+
+	res := responsegraph.ResponseGenericGet{
+		Status:  "Success",
+		Message: "Berhasil Mendapatkan Data",
+		Data:    get,
+	}
+	return c.JSON(http.StatusOK, res)
+}
+
 // Update Data DB
 func (Controller Controller) UpdateCovidDB(c echo.Context) error {
 	cv := new(Covid)
