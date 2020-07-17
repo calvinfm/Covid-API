@@ -11,8 +11,8 @@ type DatabaseConfig struct{}
 const (
 	host     = "localhost"
 	dbname   = "postgres"
-	user     = "root"
-	password = "root"
+	user     = "postgres"
+	password = "postgres"
 	schema   = "db_covid_palembang"
 )
 
