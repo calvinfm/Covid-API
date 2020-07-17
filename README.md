@@ -1,6 +1,13 @@
 # Covid-API
 Corona API for Palembang City (Fake Data)
 
+Base URL    : `http://classico.id:1103/`
+Example     : `http://classico.id:1103/covid/`
+### Routes
+  * `GET` `covid/` : `Mengakses seluruh data Covid-19 Palembang`
+  * `GET` `-`
+  * `GET` `-`
+
 ### Tutorial API
   * Clone Repository ini dengan cara `git clone https://github.com/calvinfm/Covid-GO-API.git`
   * Atau bisa dengan mendownload menjadi `.zip` file
