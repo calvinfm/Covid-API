@@ -2,7 +2,9 @@
 Corona API for Palembang City (Fake Data)
 
 Base URL    : `http://classico.id:1103/`
+
 Example     : `http://classico.id:1103/covid/`
+
 ### Routes
   * `GET` `covid/` : `Mengakses seluruh data Covid-19 Palembang`
   * `GET` `-`
