@@ -7,8 +7,11 @@ Example     : `http://classico.id:1103/covid/`
 
 ### Routes
   * `GET` `covid/` : `Mengakses seluruh data Covid-19 Palembang`
-  * `GET` `-`
-  * `GET` `-`
+  * `GET` `covid/{id}` : `Mengakses data Covid-19 Palembang dengan id`
+  * `GET` `covid/info/` : `Mengakses seluruh data Info Covid-19`
+  * `POST` `covid/` : `Mengakses seluruh data Covid-19 Palembang`
+  * `PUT` `covid/{id}` : `Mengedit data Covid-19 Palembang`
+  * `DELETE` `covid/{id}` : `Menghapus data Covid-19 Palembang`
 
 ### Tutorial API
   * Clone Repository ini dengan cara `git clone https://github.com/calvinfm/Covid-GO-API.git`
