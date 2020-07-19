@@ -138,6 +138,53 @@ func (ExampleModel Model) GetCovidIdDb(id int) CovidData {
 	return covid
 }
 
+// GET From DB
+func (ExampleModel Model) GetCovidPageDb(id int) Covids {
+
+	sqlStatement := "SELECT daerah_kecamatan.id, daerah_kecamatan.kecamatan, daerah_kecamatan.jumlah_penduduk_positif, daerah_kecamatan.jumlah_penduduk_pulih, daerah_kecamatan.jumlah_penduduk_wafat, zona_daerah.zona_daerah FROM daerah_kecamatan " +
+		"INNER JOIN zona_daerah ON zona_daerah.id = daerah_kecamatan.keadaan_zona " +
+		"ORDER BY daerah_kecamatan.id ASC " +
+		"OFFSET $1 " +
+		"LIMIT $2"
+
+	var pageNumber int
+	if id != 0 {
+		pageNumber = id
+	} else {
+		pageNumber = 1
+	}
+
+	totalRecords := 10
+
+	offset := (pageNumber - 1) * totalRecords
+
+	res, err := ExampleModel.db.GetDatabaseConfig().Query(sqlStatement,
+		offset,
+		totalRecords)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	getCovid := ExampleModel.GetCovidDb()
+	defer res.Close()
+
+	result := Covids{}
+
+	for res.Next() {
+		covid := CovidData{}
+		err2 := res.Scan(&covid.Id, &covid.Kecamatan, &covid.Jumlah_penduduk_positif, &covid.Jumlah_penduduk_pulih, &covid.Jumlah_penduduk_wafat, &covid.Keadaan_zona)
+		// Exit if we get an error
+		if err2 != nil {
+			fmt.Println(err2)
+		}
+
+		result.Covids = append(result.Covids, covid)
+	}
+	result.Total = getCovid.Total
+
+	return result
+}
+
 type InfoCovid struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`

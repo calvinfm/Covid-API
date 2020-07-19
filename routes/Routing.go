@@ -18,6 +18,7 @@ func (Routing Routing) GetRoutes() *echo.Echo {
 	e.POST("/covid/", Routing.routes.PostsCovidDB)
 	e.GET("/covid/", Routing.routes.GetCovidDB)
 	e.GET("/info/covid/", Routing.routes.GetCovidInfoDB)
+	e.GET("/covid/page/:id", Routing.routes.GetCovidPageDB)
 	e.GET("/covid/:id", Routing.routes.GetCovidIdDB)
 	e.PUT("/covid/:id", Routing.routes.UpdateCovidDB)
 	e.DELETE("/covid/:id", Routing.routes.DeleteCovidDb)

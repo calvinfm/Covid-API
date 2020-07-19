@@ -103,6 +103,24 @@ func (Controller Controller) GetCovidIdDB(c echo.Context) error {
 }
 
 // Get Data DB
+func (Controller Controller) GetCovidPageDB(c echo.Context) error {
+	id := c.Param("id")
+	ids, err := strconv.Atoi(id)
+	if err == nil {
+		fmt.Println(ids)
+	}
+
+	get := Controller.model.GetCovidPageDb(ids)
+
+	res := responsegraph.ResponseGenericGet{
+		Status:  "Success",
+		Message: "Berhasil Mendapatkan Data",
+		Data:    get,
+	}
+	return c.JSON(http.StatusOK, res)
+}
+
+// Get Data DB
 func (Controller Controller) GetCovidInfoDB(c echo.Context) error {
 	get := Controller.model.GetCovidInfoDb()
 
