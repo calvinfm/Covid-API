@@ -9,6 +9,7 @@ Example     : `http://classico.id:1103/covid/`
   * `GET` `covid/` : `Mengakses seluruh data Covid-19 Palembang`
   * `GET` `covid/{id}` : `Mengakses data Covid-19 Palembang dengan id`
   * `GET` `info/covid/` : `Mengakses seluruh data Info Covid-19`
+  * `GET` `covid/page/{id}` : `Mengakses data Covid-19 Palembang dengan Pagination`
   * `POST` `covid/` : `Mengakses seluruh data Covid-19 Palembang`
   * `PUT` `covid/{id}` : `Mengedit data Covid-19 Palembang`
   * `DELETE` `covid/{id}` : `Menghapus data Covid-19 Palembang`
