@@ -165,7 +165,6 @@ func (ExampleModel Model) GetCovidPageDb(id int) Covids {
 		fmt.Println(err)
 	}
 
-	getCovid := ExampleModel.GetCovidDb()
 	defer res.Close()
 
 	result := Covids{}
@@ -180,8 +179,6 @@ func (ExampleModel Model) GetCovidPageDb(id int) Covids {
 
 		result.Covids = append(result.Covids, covid)
 	}
-	result.Total = getCovid.Total
-
 	return result
 }
 

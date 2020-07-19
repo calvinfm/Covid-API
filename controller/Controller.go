@@ -115,7 +115,19 @@ func (Controller Controller) GetCovidPageDB(c echo.Context) error {
 	res := responsegraph.ResponseGenericGet{
 		Status:  "Success",
 		Message: "Berhasil Mendapatkan Data",
-		Data:    get,
+		Data:    get.Covids,
+	}
+	return c.JSON(http.StatusOK, res)
+}
+
+// Get Data DB
+func (Controller Controller) GetCovidTotalDB(c echo.Context) error {
+	get := Controller.model.GetCovidDb()
+
+	res := responsegraph.ResponseGenericGet{
+		Status:  "Success",
+		Message: "Berhasil Mendapatkan Data",
+		Data:    get.Total,
 	}
 	return c.JSON(http.StatusOK, res)
 }
